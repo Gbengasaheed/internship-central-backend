@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +34,7 @@ public class ExperienceService {
             ExperienceDto experienceDto  = new ExperienceDto();
             BeanUtils.copyProperties(experience,experienceDto);
             return experienceDto;
-        }).toList();
+        }).collect(Collectors.toList());
     }
 
     public void update(long id, UpdateExperienceRequest updateExperienceRequest) throws CommonsModuleException, InvocationTargetException, IllegalAccessException {

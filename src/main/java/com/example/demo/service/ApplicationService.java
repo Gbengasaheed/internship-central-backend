@@ -74,7 +74,7 @@ public class ApplicationService {
                         log.error("An error occurred for this user [{}]", projection.getUserId());
                     }
                     return applicantDto;
-        }).toList();
+        }).collect(Collectors.toList());
         return PageDto.build(projections, dtos);
     }
 }

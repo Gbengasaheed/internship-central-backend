@@ -24,6 +24,7 @@ import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @ControllerAdvice(basePackages = { "com.example.demo.controller"} )
 @RequiredArgsConstructor
@@ -50,7 +51,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         List<String> errorMessages = result.getAllErrors()
                 .stream()
                 .map(err -> messageSource.getMessage(err, locale))
-                .toList();
+                .collect(Collectors.toList());
         return new ResponseEntity<>(new ErrorMessage(errorMessages.toString()), HttpStatus.BAD_REQUEST);
     }
 
