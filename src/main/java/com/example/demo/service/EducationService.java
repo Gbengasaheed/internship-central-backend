@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class EducationService {
             EducationDto educationDto  = new EducationDto();
             BeanUtils.copyProperties(education,educationDto);
             return educationDto;
-        }).toList();
+        }).collect(Collectors.toList());
     }
 
     public void update(long id, UpdateEducationRequest updateEducationRequest) throws CommonsModuleException, InvocationTargetException, IllegalAccessException {
