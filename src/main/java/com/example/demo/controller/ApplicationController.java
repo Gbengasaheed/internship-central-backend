@@ -27,7 +27,7 @@ public class ApplicationController {
     @ResponseStatus(HttpStatus.CREATED)
     public void apply(Authentication authentication, @RequestParam String jobId) throws CommonsModuleException {
         long userId = IUserDetails.getId(authentication);
-        long jobIdLong = IAppendableReferenceUtils.getIdFrom(jobId);
+        // long jobIdLong = IAppendableReferenceUtils.getIdFrom(jobId);
         applicationService.apply(userId, jobIdLong);
 
     }
