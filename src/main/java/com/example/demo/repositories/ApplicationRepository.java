@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
-    @Query(value = "SELECT CASE WHEN COUNT(*) > 0 THEN TRUE ELSE FALSE END FROM applications a WHERE a.user_id = ?1 AND a.job_id = ?2", nativeQuery = true)
+   
     boolean existsByUserIdAndJobId(long userId, long jobId);
 
 
