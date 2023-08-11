@@ -58,8 +58,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    private User createUser(CreateUserDto createUserDto) {
+    private User createUser(CreateUserDto createUserDto, Authorities authorities) {
         User user = new User();
+        if(authorities.equals(Authorities.USER)){
+            user.setRole("USER");
+        } else{
+            user.setRole("RECRUITER");
+        }
         String username = generateRandomUsername();
         BeanUtils.copyProperties(createUserDto, user);
         user.setUsername(username);
@@ -73,8 +78,8 @@ public class UserServiceImpl implements UserService {
         return UserDto.toDto(user);
     }
 
-    public User registerNewUser(CreateUserDto signupDto, Authorities... authorities) throws MessagingException {
-        User user = createUser(signupDto);
+    public User registerNewUser(CreateUserDto signupDto, Authorities authorities) throws MessagingException {
+        User user = createUser(signupDto, authorities);
         final String username = user.getEmail();
 
         createUserDefaultRoles(username, authorities);
@@ -124,8 +129,6 @@ public class UserServiceImpl implements UserService {
         User user = findByUsername(username);
         if (tokenVerificationService.verifyToken(token)) {
             userRepository.updateEmailVerificationStatus(user.getId(), user.getEmail());
-        } else {
-            throw new CommonsModuleException("invalid token", HttpStatus.BAD_REQUEST);
         }
     }
 

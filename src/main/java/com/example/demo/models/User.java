@@ -33,7 +33,7 @@ public class User extends IAppendableReference {
 
     @Column(unique = true, nullable = false)
     private String phoneNo;
-
+    private String role;
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private Date createdAt;

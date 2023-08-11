@@ -15,7 +15,7 @@ public interface UserService {
 
     User saveUser(User user);
 
-    User registerNewUser(CreateUserDto signupDto, Authorities... authorities) throws MessagingException;
+    User registerNewUser(CreateUserDto signupDto, Authorities authorities) throws MessagingException;
 
     UserDto findUserById(long userId) throws CommonsModuleException;
 

@@ -11,6 +11,8 @@ import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
@@ -35,14 +37,15 @@ public class SignUpController {
 
     @PostMapping("v6/recruiter-signUp")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createRecruiter(@RequestBody @Valid CreateRecruiterRequest signupDto)throws MessagingException {
+    public void createRecruiter(@RequestBody @Valid CreateRecruiterRequest signupDto) throws MessagingException {
         User user = userServiceImpl.registerNewUser(signupDto, Authorities.RECRUITER);
         CompanyDto companyDto = signupDto.getCompany();
         companyService.addCompany(user.getId(), companyDto);
     }
 
-    @RequestMapping("v6/verify/{username}/{token}")
-    @ResponseStatus(OK)
-    public void verify(@PathVariable("username") String username,@PathVariable("token") String token) throws CommonsModuleException {
-        userServiceImpl.verifyUser(username,token);
-    }}
+    @GetMapping("v6/verify/{username}/{token}")
+    public RedirectView verify(@PathVariable("username") String username, @PathVariable("token") String token) throws CommonsModuleException {
+        userServiceImpl.verifyUser(username, token);
+        return new RedirectView("https://www.internshipcentral.org.uk/");
+    }
+}

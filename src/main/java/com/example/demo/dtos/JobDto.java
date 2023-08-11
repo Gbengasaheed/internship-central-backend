@@ -28,6 +28,8 @@ public class JobDto {
 
     private String reference;
 
+    private String country;
+
 
     public static JobDto fromModel(Job job){
         JobDto jobDto = new JobDto();
