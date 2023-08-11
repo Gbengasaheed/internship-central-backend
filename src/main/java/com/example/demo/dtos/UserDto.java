@@ -15,7 +15,7 @@ public class UserDto {
     private String phoneNo;
     private String email;
     private String username;
-
+    private String role;
     public static UserDto toDto(User userModel) {
         UserDto dto = new UserDto();
         BeanUtils.copyProperties(userModel, dto);
