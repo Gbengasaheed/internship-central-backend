@@ -124,8 +124,6 @@ public class UserServiceImpl implements UserService {
         User user = findByUsername(username);
         if (tokenVerificationService.verifyToken(token)) {
             userRepository.updateEmailVerificationStatus(user.getId(), user.getEmail());
-        } else {
-            throw new CommonsModuleException("invalid token", HttpStatus.BAD_REQUEST);
         }
     }
 
